@@ -9,3 +9,5 @@ const Routes = createAppContainer(
 		Box
 	})
 );
+
+export default Routes;
