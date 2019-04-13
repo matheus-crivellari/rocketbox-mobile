@@ -35,8 +35,7 @@ public class MainApplication extends Application implements ReactApplication {
             new RNFSPackage(),
             new VectorIconsPackage(),
             new AsyncStoragePackage(),
-            new RNGestureHandlerPackage(),
-            new RNFileViewerPackage()
+            new RNGestureHandlerPackage()
       );
     }
 
