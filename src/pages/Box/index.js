@@ -78,7 +78,6 @@ export default class Box extends Component {
   renderItem = ({item}) => {
     return(
       <TouchableOpacity
-        // FIXME escope not working
         onPress={() => this.openFile(item)}
         style={styles.file}
       >
