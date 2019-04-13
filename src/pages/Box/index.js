@@ -8,6 +8,8 @@ import ImagePicker from 'react-native-image-picker';
 import RNFS from 'react-native-fs';
 import FileViewer from 'react-native-file-viewer';
 
+import socket from 'socket.io-client';
+
 import api from '../../services/api';
 
 import styles from './styles';
@@ -20,6 +22,9 @@ export default class Box extends Component {
   async componentDidMount() {
     const box = await AsyncStorage.getItem('@RocketBox:box');
 
+    // Subscribe to socket to receive new files
+    this.subscribeToNewFiles(box);
+
     const response = await api.get(`boxes/${box}`);
 
     console.log('Box id: ', box);
@@ -28,8 +33,7 @@ export default class Box extends Component {
 
   }
 
-  subscribeToNewFiles = () => {
-    const box = this.props.match.params.id;
+  subscribeToNewFiles = (box) => {
     const io = socket('https://omnistack-teco.herokuapp.com');
 
     // Subscribes to box socketio room
@@ -75,7 +79,7 @@ export default class Box extends Component {
     return(
       <TouchableOpacity
         // FIXME escope not working
-        onPress={() => {this.openFile(item)}}
+        onPress={() => this.openFile(item)}
         style={styles.file}
       >
         <View style={styles.fileInfo}>
