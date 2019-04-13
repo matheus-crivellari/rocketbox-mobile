@@ -47,6 +47,10 @@ export default class Box extends Component {
     );
   }
 
+  handleUpload(){
+
+  }
+
   render() {
 	  return (
       <View style={styles.container}>
@@ -59,6 +63,9 @@ export default class Box extends Component {
           ItemSeparatorComponent={()=><View style={styles.separator} />}
           renderItem={this.renderItem}
         />
+        <TouchableOpacity style={styles.fab} onPress={this.handleUpload}>
+          <Icon name='cloud-upload' size={24} color='#fff' />
+        </TouchableOpacity>
       </View>
     );
   }
