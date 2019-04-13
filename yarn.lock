@@ -5002,6 +5002,11 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
+react-native-file-viewer@^1.0.14:
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/react-native-file-viewer/-/react-native-file-viewer-1.0.14.tgz#a2b8916882dea7de9f6580d70089c3f9ec20364f"
+  integrity sha512-WW3gOH86XiiNATZGoxWK6FhD0LJ4lsmsv+1P+/FiSOSyDbkSPRlWgOYnW+5A4oW8+tFt3FxVnZ6kLOn2HnpBSA==
+
 react-native-fs@^2.13.3:
   version "2.13.3"
   resolved "https://registry.yarnpkg.com/react-native-fs/-/react-native-fs-2.13.3.tgz#a422f0ecd8a093a7e99d8d51ff51440e090a18a8"
