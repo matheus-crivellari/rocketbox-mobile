@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { distanceInWords } from 'date-fns';
 import en from 'date-fns/locale/en';
+import ImagePicker from 'react-native-image-picker';
 
 import api from '../../services/api';
 
@@ -12,7 +13,7 @@ import styles from './styles';
 export default class Box extends Component {
   state = {
     box: {}
-  }
+  };
 
   async componentDidMount() {
     const box = await AsyncStorage.getItem('@RocketBox:box');
@@ -47,8 +48,31 @@ export default class Box extends Component {
     );
   }
 
-  handleUpload(){
+  // This must me a function if made
+  // it a method it won't find state
+  handleUpload = () => {
+    ImagePicker.launchImageLibrary({}, async upload => {
+      if(upload.error){
+        console.log('ImagePicker error.');
+      }else if(upload.didCancel){
+        console.log('Canceled by user.');
+      }else{
+        const data = new FormData();
 
+        const [filename, extension] = upload.fileName.split('.');
+        const ext = extension.toLowerCase() == 'heic' ? 'jpg' : extension;
+
+        data.append('file', {
+          uri: upload.uri,
+          type: upload.type,
+          name: `${filename}.${ext}`,
+        });
+
+        console.log('Teco ', this.state);
+
+        api.post(`boxes/${this.state.box._id}/files`, data);
+      }
+    });
   }
 
   render() {
