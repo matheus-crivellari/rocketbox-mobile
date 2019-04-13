@@ -5,6 +5,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { distanceInWords } from 'date-fns';
 import en from 'date-fns/locale/en';
 import ImagePicker from 'react-native-image-picker';
+import RNFS from 'react-native-fs';
+import FileViewer from 'react-native-file-viewer';
 
 import api from '../../services/api';
 
@@ -20,11 +22,27 @@ export default class Box extends Component {
 
     const response = await api.get(`boxes/${box}`);
 
-    console.log(box);
+    console.log('Box id: ', box);
 
     this.setState({box: response.data});
 
   }
+
+  openFile = async (file) => {
+    try{
+      const filePath = `${RNFS.DocumentDirectoryPath}/${file.title}`;
+
+      await RNFS.downloadFile({
+        fromUrl: file.url,
+        toFile: filePath,
+      });
+
+      await FileViewer.open(filePath);
+    }catch(e){
+      console.log('File not supported.');
+    }
+
+  };
 
   /**
    * Renders each element of FlatList.
@@ -33,7 +51,8 @@ export default class Box extends Component {
   renderItem({item}){
     return(
       <TouchableOpacity
-        onPress={() => {}}
+        // FIXME escope not working
+        onPress={() => {console.log(this); this.openFile(item)}}
         style={styles.file}
       >
         <View style={styles.fileInfo}>
@@ -67,8 +86,6 @@ export default class Box extends Component {
           type: upload.type,
           name: `${filename}.${ext}`,
         });
-
-        console.log('Teco ', this.state);
 
         api.post(`boxes/${this.state.box._id}/files`, data);
       }
