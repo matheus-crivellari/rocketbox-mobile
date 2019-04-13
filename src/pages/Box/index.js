@@ -35,7 +35,7 @@ export default class Box extends Component {
           <Icon name="inser-drive-file" size={24} color="#a5cfff" />
           <Text style={styles.fileTitle}>{item.title}</Text>
         </View>
-        <Text style={stytles.fileDate}>
+        <Text style={styles.fileDate}>
           ago
         </Text>
       </TouchableOpacity>
