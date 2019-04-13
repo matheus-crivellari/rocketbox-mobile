@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { distanceInWords } from 'date-fns';
+import en from 'date-fns/locale/en';
 
 import api from '../../services/api';
 
@@ -16,6 +18,8 @@ export default class Box extends Component {
     const box = await AsyncStorage.getItem('@RocketBox:box');
 
     const response = await api.get(`boxes/${box}`);
+
+    console.log(box);
 
     this.setState({box: response.data});
 
@@ -32,11 +36,12 @@ export default class Box extends Component {
         style={styles.file}
       >
         <View style={styles.fileInfo}>
-          <Icon name="inser-drive-file" size={24} color="#a5cfff" />
+          <Icon name="insert-drive-file" size={24} color="#a5cfff" />
           <Text style={styles.fileTitle}>{item.title}</Text>
         </View>
         <Text style={styles.fileDate}>
-          ago
+          {distanceInWords(item.createdAt, new Date(), {locale: en})}
+          {' '}ago
         </Text>
       </TouchableOpacity>
     );
@@ -45,7 +50,7 @@ export default class Box extends Component {
   render() {
 	  return (
       <View style={styles.container}>
-        <Text style={styles.boxTitle}>{this.state.box.title}!</Text>
+        <Text style={styles.boxTitle}>{this.state.box.title}</Text>
 
         <FlatList
           style={styles.list}
