@@ -37,6 +37,8 @@ export default class Box extends Component {
         toFile: filePath,
       });
 
+      console.log('FilePath: ', filePath);
+
       await FileViewer.open(filePath);
     }catch(e){
       console.log('File not supported.');
@@ -48,11 +50,11 @@ export default class Box extends Component {
    * Renders each element of FlatList.
    * @param {object} Object that represents a file.
    */
-  renderItem({item}){
+  renderItem = ({item}) => {
     return(
       <TouchableOpacity
         // FIXME escope not working
-        onPress={() => {console.log(this); this.openFile(item)}}
+        onPress={() => {this.openFile(item)}}
         style={styles.file}
       >
         <View style={styles.fileInfo}>
