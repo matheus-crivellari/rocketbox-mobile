@@ -30,7 +30,7 @@ This project covers all of the mobile development the following technologies:
 1. Clone this repository in your local machine:
 
             cd ~
-            mkdir rocketseat; cd rocketseat
+            mkdir rocketbox; cd rocketbox
             mkdir mobile; cd mobile
             git clone https://github.com/matheus-crivellari/rocketbox-mobile .
 
