@@ -28,6 +28,27 @@ export default class Box extends Component {
 
   }
 
+  subscribeToNewFiles = () => {
+    const box = this.props.match.params.id;
+    const io = socket('https://omnistack-teco.herokuapp.com');
+
+    // Subscribes to box socketio room
+    // to receive realtime updates
+    io.emit('connectRoom', box);
+
+    // Fired when received a new file from server
+    // FIXME: Socketio event not working
+    io.on('file', data => {
+        alert(data);
+        this.setState({
+            box : {
+                ...this.state.box,
+                files : [data, ...this.state.box.files]
+            }
+        });
+    });
+  }
+
   openFile = async (file) => {
     try{
       const filePath = `${RNFS.DocumentDirectoryPath}/${file.title}`;
